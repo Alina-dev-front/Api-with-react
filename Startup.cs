@@ -28,7 +28,12 @@ namespace ReactASPCrud
         {
             services.AddControllers();
             services.AddSingleton<UserService>();
-            services.AddCors(options => { options.AddDefaultPolicy(builder => builder.SetIsOriginAllowed(_ => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials()); });
+            services.AddCors(o => o.AddPolicy("ReactPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
